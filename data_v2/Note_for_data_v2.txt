@@ -1,0 +1,4 @@
+Data_processor for dataset version 2: extract multiple features from audio (Chroma STFT, mfcc, etc.).
+Because each audio numpy contains too many features (features.shape: (194, 259) ), the size of data_v2 is 2.3 GB.
+The preprocessed dataset doesn't help the model achieve better performance on test set (details are included in resnet_v2: "training_log"),
+therefore at the end I didn't use the results which based on data_v2. To save file size, I do not include preprocessed data in this file.

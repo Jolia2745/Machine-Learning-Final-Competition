@@ -1,0 +1,98 @@
+2024-05-04 01:53:04.498217: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-05-04 01:53:06.791376: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-05-04 01:53:12.426079: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2024-05-04 01:53:36.708803: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1928] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 31141 MB memory:  -> device: 0, name: Tesla V100-SXM2-32GB, pci bus id: 0000:3b:00.0, compute capability: 7.0
+Traceback (most recent call last):
+  File "/scratch/zc2745/MLproject/Inception/data_loader.py", line 90, in <module>
+    train_loader, val_loader, test_loader  = generate_datasets()
+                                             ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zc2745/MLproject/Inception/data_loader.py", line 76, in generate_datasets
+    dataset = create_dataset(all_image_paths, all_labels)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zc2745/MLproject/Inception/data_loader.py", line 62, in create_dataset
+    dataset = dataset.map(lambda x, y: (preprocess_dataset(x), y), num_parallel_calls=tf.data.experimental.AUTOTUNE)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/data/ops/dataset_ops.py", line 2299, in map
+    return map_op._map_v2(
+           ^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/data/ops/map_op.py", line 40, in _map_v2
+    return _ParallelMapDataset(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/data/ops/map_op.py", line 148, in __init__
+    self._map_func = structured_function.StructuredFunctionWrapper(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/data/ops/structured_function.py", line 265, in __init__
+    self._function = fn_factory()
+                     ^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/polymorphic_function.py", line 1251, in get_concrete_function
+    concrete = self._get_concrete_function_garbage_collected(*args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/polymorphic_function.py", line 1221, in _get_concrete_function_garbage_collected
+    self._initialize(args, kwargs, add_initializers_to=initializers)
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/polymorphic_function.py", line 696, in _initialize
+    self._concrete_variable_creation_fn = tracing_compilation.trace_function(
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/tracing_compilation.py", line 178, in trace_function
+    concrete_function = _maybe_define_function(
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/tracing_compilation.py", line 283, in _maybe_define_function
+    concrete_function = _create_concrete_function(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/tracing_compilation.py", line 310, in _create_concrete_function
+    traced_func_graph = func_graph_module.func_graph_from_py_func(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/framework/func_graph.py", line 1059, in func_graph_from_py_func
+    func_outputs = python_func(*func_args, **func_kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/eager/polymorphic_function/polymorphic_function.py", line 599, in wrapped_fn
+    out = weak_wrapped_fn().__wrapped__(*args, **kwds)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/data/ops/structured_function.py", line 231, in wrapped_fn
+    ret = wrapper_helper(*args)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/data/ops/structured_function.py", line 161, in wrapper_helper
+    ret = autograph.tf_convert(self._func, ag_ctx)(*nested_args)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/autograph/impl/api.py", line 693, in wrapper
+    raise e.ag_error_metadata.to_exception(e)
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/autograph/impl/api.py", line 690, in wrapper
+    return converted_call(f, args, kwargs, options=options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/autograph/impl/api.py", line 439, in converted_call
+    result = converted_f(*effective_args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/state/partition1/job-46046615/__autograph_generated_filee5engrqd.py", line 5, in <lambda>
+    tf__lam = lambda x, y: ag__.with_function_scope(lambda lscope: (ag__.converted_call(preprocess_dataset, (x,), None, lscope), y), 'lscope', ag__.STD)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/autograph/core/function_wrappers.py", line 113, in with_function_scope
+    return thunk(scope)
+           ^^^^^^^^^^^^
+  File "/state/partition1/job-46046615/__autograph_generated_filee5engrqd.py", line 5, in <lambda>
+    tf__lam = lambda x, y: ag__.with_function_scope(lambda lscope: (ag__.converted_call(preprocess_dataset, (x,), None, lscope), y), 'lscope', ag__.STD)
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/autograph/impl/api.py", line 441, in converted_call
+    result = converted_f(*effective_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/state/partition1/job-46046615/__autograph_generated_fileofq6lg17.py", line 14, in tf__preprocess_dataset
+    image = ag__.converted_call(ag__.ld(tf).image.resize, (ag__.ld(image), (ag__.ld(image_height), ag__.ld(image_width))), None, fscope)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/autograph/impl/api.py", line 377, in converted_call
+    return _call_unconverted(f, args, kwargs, options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/autograph/impl/api.py", line 460, in _call_unconverted
+    return f(*args)
+           ^^^^^^^^
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/util/traceback_utils.py", line 153, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/ext3/miniconda3/lib/python3.12/site-packages/tensorflow/python/ops/image_ops_impl.py", line 1461, in _resize_images_common
+    raise ValueError('\'images\' contains no shape.')
+ValueError: in user code:
+
+    File "/scratch/zc2745/MLproject/Inception/data_loader.py", line 62, in None  *
+        lambda x, y: (preprocess_dataset(x), y)
+    File "/scratch/zc2745/MLproject/Inception/data_loader.py", line 34, in preprocess_dataset  *
+        image = tf.image.resize(image, (image_height, image_width))  # image.resize: [batchsize, h, w, channels]
+
+    ValueError: 'images' contains no shape.
+

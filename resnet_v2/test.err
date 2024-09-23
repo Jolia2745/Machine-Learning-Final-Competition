@@ -1,0 +1,2 @@
+/bin/bash: line 2: cd: /scratch/zc2745/MLproject/resnet: No such file or directory
+slurmstepd: error: *** JOB 46243773 ON gr031 CANCELLED AT 2024-05-08T04:45:31 ***
